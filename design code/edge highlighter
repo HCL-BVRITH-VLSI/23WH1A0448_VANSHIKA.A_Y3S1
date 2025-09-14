@@ -1,0 +1,39 @@
+`timescale 1ns/1ps
+module edgehighlighter #(
+parameter bit USE_SYNC = 1
+)(
+input logic clk,
+input logic rst_n,
+input logic in_sig,
+output logic rise_pulse,
+output logic fall_pulse
+);
+logic s1, s2, cur, prev;
+generate
+if (USE_SYNC) begin
+always_ff @(posedge clk or negedge rst_n) begin
+
+if (!rst_n) begin
+s1 &lt;= 1&#39;b0; s2 &lt;= 1&#39;b0;
+end else begin
+s1 &lt;= in_sig;
+s2 &lt;= s1;
+end
+end
+assign cur = s2;
+end else begin
+assign cur = in_sig;
+end
+endgenerate
+always_ff @(posedge clk or negedge rst_n) begin
+if (!rst_n) begin
+prev &lt;= 1&#39;b0;
+rise_pulse &lt;= 1&#39;b0;
+fall_pulse &lt;= 1&#39;b0;
+end else begin
+rise_pulse &lt;= cur &amp; ~prev;
+fall_pulse &lt;= ~cur &amp; prev;
+prev &lt;= cur;
+end
+end
+endmodule
