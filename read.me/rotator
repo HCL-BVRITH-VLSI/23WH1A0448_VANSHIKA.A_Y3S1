@@ -1,0 +1,60 @@
+DESIGN REPORT  
+
+PROBLEM STATEMENT  
+To design and implement an 8-bit Rotator circuit in VLSI. The rotator shifts the bits of the input word circularly to the left or right by a specified number of positions, ensuring that the rotated-out bits are reintroduced at the opposite end.  
+
+USE CASE  
+- Used in cryptographic systems for key/data mixing.  
+- Useful in arithmetic operations such as multiplication/division by powers of 2.  
+- Applied in signal processing algorithms where cyclic shifts are required.  
+- Helps in microprocessor architectures for bit manipulation instructions.  
+
+DESIGN REQUIREMENTS  
+1. Input: 8-bit binary word (B7 B6 B5 B4 B3 B2 B1 B0).  
+2. Control input: Direction (0 = left rotate, 1 = right rotate).  
+3. Output: 8-bit binary word with bits rotated left or right by one position.  
+   - Left Rotate Example: 10110010 → 01100101.  
+   - Right Rotate Example: 10110010 → 01011001.  
+4. Circuit should be compact and efficient.  
+5. Must operate with minimum propagation delay.  
+
+DESIGN CONSTRAINTS  
+- Limited logic cells and interconnections in layout.  
+- Power and area must remain minimal.  
+- Circuit must pass DRC and LVS verification.  
+- Reliable operation across all 8-bit input combinations.  
+
+DESIGN METHODOLOGY & IMPLEMENTATION DETAILS  
+1. Core Logic  
+   - Multiplexers or wiring logic used to reroute bits.  
+   - For left rotate: (B6 B5 B4 B3 B2 B1 B0 B7).  
+   - For right rotate: (B0 B7 B6 B5 B4 B3 B2 B1).  
+
+2. Implementation Steps  
+   - Designed schematic using 2x1 multiplexers controlled by direction signal.  
+   - Simulated functional correctness with multiple test inputs.  
+   - Layout designed with CMOS logic gates and interconnections.  
+   - Verified functionality via post-layout simulation.  
+
+FUNCTIONAL SIMULATION METHODOLOGY & TEST CASES  
+- Input stimulus: Different 8-bit binary values tested in both directions.  
+- Test Cases:  
+  - TC1: Input = 10110010 → Left = 01100101, Right = 01011001.  
+  - TC2: Input = 11111111 → Left = 11111111, Right = 11111111.  
+  - TC3: Input = 00010000 → Left = 00100000, Right = 00001000.  
+- Simulation Tool: SPICE/Cadence for verification.  
+
+RESULTS & ANALYSIS  
+- Left and right rotations worked correctly for all test cases.  
+- Minimal propagation delay since design used simple multiplexers.  
+- Layout area and power consumption were very low.  
+- Post-layout verification matched schematic simulation.  
+
+CHALLENGES & CONCLUSIONS  
+Challenges:  
+- Avoiding errors in bit position mapping for both left and right rotations.  
+- Optimizing layout interconnections without increasing area.  
+- Ensuring correct control logic for direction.  
+
+Conclusions:  
+The 8-bit Rotator circuit was successfully designed and verified. The circuit accurately rotated bits in both directions with negligible delay and power consumption. This experiment demonstrated the importance of bit-level manipulations in digital system design and their efficient VLSI implementation.  
