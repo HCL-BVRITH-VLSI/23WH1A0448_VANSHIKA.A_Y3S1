@@ -1,0 +1,58 @@
+DESIGN REPORT
+
+PROBLEM STATEMENT  
+To design and implement a Nibble Swapper circuit in VLSI that swaps the higher-order 4 bits (upper nibble) with the lower-order 4 bits (lower nibble) of an 8-bit binary input. This circuit is useful for data manipulation, encryption, and testing in digital systems.  
+
+USE CASE  
+- Used in data encoding and encryption for simple scrambling operations.  
+- Helpful in digital systems where bit reordering is required.  
+- Useful in test circuits to validate data path functionality.  
+- Can be applied in microprocessor-based systems for byte and nibble manipulation.  
+
+DESIGN REQUIREMENTS  
+1. Input: An 8-bit binary word (B7 B6 B5 B4 B3 B2 B1 B0).  
+2. Output: A new 8-bit word where the nibbles are swapped (B3 B2 B1 B0 B7 B6 B5 B4).  
+3. Must be realizable using multiplexers or wiring logic.  
+4. Should be simple and efficient in terms of gates and interconnections.  
+5. Must work reliably across different input combinations.  
+
+DESIGN CONSTRAINTS  
+- Limited by number of interconnections and available logic cells.  
+- Circuit must introduce minimal propagation delay.  
+- Power and area should remain minimal for efficient VLSI implementation.  
+- Layout must satisfy DRC and LVS constraints.  
+
+DESIGN METHODOLOGY & IMPLEMENTATION DETAILS  
+1. Core Logic  
+   - Direct wiring or 2x1 multiplexers used to swap nibbles.  
+   - Upper nibble (B7–B4) is redirected to lower nibble positions.  
+   - Lower nibble (B3–B0) is redirected to upper nibble positions.  
+
+2. Implementation Steps  
+   - Designed schematic using multiplexers or simple wiring connections.  
+   - Functional simulation with multiple 8-bit input patterns.  
+   - Layout design created using CMOS cells.  
+   - Verification with standard VLSI design rules.  
+
+FUNCTIONAL SIMULATION METHODOLOGY & TEST CASES  
+- Input stimulus: Different 8-bit binary patterns.  
+- Test Cases:  
+  - TC1: Input 1011 1100 → Output 1100 1011.  
+  - TC2: Input 1111 0000 → Output 0000 1111.  
+  - TC3: Input 0101 1010 → Output 1010 0101.  
+- Simulation Tool: SPICE/Cadence for transient and logical verification.  
+
+RESULTS & ANALYSIS  
+- Nibble swapping worked correctly for all input test cases.  
+- Propagation delay was minimal since only wiring/multiplexer logic was used.  
+- Area and power consumption were negligible.  
+- Layout verification passed DRC and LVS checks.  
+
+CHALLENGES & CONCLUSIONS  
+Challenges:  
+- Ensuring correct mapping between input and output bit positions.  
+- Avoiding wiring errors in schematic and layout.  
+- Managing layout interconnections efficiently.  
+
+Conclusions:  
+The Nibble Swapper circuit was successfully designed and implemented. Simulation confirmed correct swapping of upper and lower nibbles for an 8-bit input. This experiment demonstrated practical data manipulation in digital systems and highlighted the efficiency of simple logic operations in VLSI design.  
