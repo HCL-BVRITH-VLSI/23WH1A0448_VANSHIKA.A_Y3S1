@@ -1,0 +1,28 @@
+`timescale 1ns/1ps
+module rotatorunit #(
+parameter int WIDTH = 8
+)(
+input logic clk,
+input logic rst_n,
+input logic enable,
+
+input logic load,
+input logic dir, // 0: left, 1: right
+input logic [WIDTH-1:0] data_in,
+output logic [WIDTH-1:0] data_out
+);
+logic [WIDTH-1:0] state;
+always_ff @(posedge clk or negedge rst_n) begin
+if (!rst_n) begin
+state &lt;= &#39;0;
+end else if (enable) begin
+if (load)
+state &lt;= data_in;
+else if (dir == 0)
+state &lt;= {state[WIDTH-2:0], state[WIDTH-1]}; // rotate left
+else
+state &lt;= {state[0], state[WIDTH-1:1]}; // rotate right
+end
+end
+assign data_out = state;
+endmodule
