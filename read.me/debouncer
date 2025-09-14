@@ -1,0 +1,61 @@
+DESIGN REPORT
+
+PROBLEM STATEMENT  
+To design and implement a Debouncer circuit in VLSI that removes unwanted noise and glitches caused by mechanical switch bouncing. The circuit ensures a clean and stable digital output signal corresponding to a switch input, making it reliable for use in digital systems.  
+
+USE CASE  
+- Used in microcontrollers and digital circuits to ensure clean input from mechanical push buttons.  
+- Essential in counters, timers, and state machines where false triggering must be avoided.  
+- Common in embedded systems, consumer electronics, and industrial control systems.  
+
+DESIGN REQUIREMENTS  
+1. Accept input from a noisy mechanical switch.  
+2. Filter out multiple transitions caused by bouncing.  
+3. Provide a single, clean transition at the output for each press/release.  
+4. Must be realizable using CMOS standard cells.  
+5. Should work reliably across different clock frequencies.  
+
+DESIGN CONSTRAINTS  
+- Limited by clock speed and available logic gates.  
+- Delay introduced by the debouncing mechanism must be acceptable.  
+- Power and area overhead should remain minimal.  
+- Synchronization issues must be avoided for glitch-free operation.  
+
+DESIGN METHODOLOGY & IMPLEMENTATION DETAILS  
+1. Core Logic  
+   - A synchronizer using Flip-Flops is used to stabilize the input signal.  
+   - A counter/timer logic monitors the stability of the switch input over a fixed interval.  
+   - Output is updated only after the input remains steady for the debounce period.  
+
+2. Sequential Control  
+   - Flip-Flops capture and hold the input state.  
+   - Counter ensures multiple bounces within a short period are ignored.  
+
+3. Implementation Steps  
+   - Schematic design using standard CMOS logic in CAD tools.  
+   - Simulation of switch bouncing by applying rapid toggling inputs.  
+   - Layout design and verification under VLSI design rules.  
+
+FUNCTIONAL SIMULATION METHODOLOGY & TEST CASES  
+- Input stimulus: Simulated bouncing signal with multiple rapid 0-1-0-1 transitions.  
+- Test Cases:  
+  - TC1: Single button press with bouncing → output produces only one clean transition.  
+  - TC2: Long press → output remains stable without glitches.  
+  - TC3: Multiple presses → each press generates exactly one output pulse.  
+- Simulation Tool: SPICE/Cadence for transient analysis.  
+
+RESULTS & ANALYSIS  
+- Circuit successfully filtered out bouncing effects.  
+- Output showed only one stable transition for each press/release.  
+- Delay introduced was within acceptable limits for digital system operation.  
+- Area and power consumption were minimal.  
+- Layout passed DRC and LVS verification checks.  
+
+CHALLENGES & CONCLUSIONS  
+Challenges:  
+- Ensuring accurate debounce timing without increasing latency.  
+- Balancing counter size (debounce time) with speed of response.  
+- Managing synchronization between switch input and system clock.  
+
+Conclusions:  
+The Debouncer circuit was successfully designed and implemented. Simulation confirmed its ability to remove switch bounce and deliver clean digital transitions. This experiment demonstrated the importance of debounce logic in ensuring reliability and robustness of digital systems.  
