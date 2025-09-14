@@ -1,0 +1,60 @@
+DESIGN REPORT
+
+PROBLEM STATEMENT  
+To design and implement an Edge Highlighter circuit in VLSI that detects and highlights the rising or falling edges of a digital signal. The circuit ensures that only transitions (0→1 or 1→0) are emphasized, producing short pulses at each detected edge.  
+
+USE CASE  
+- Used in digital systems to detect signal transitions for triggering other circuits.  
+- Useful in counters, event detectors, and timing analysis.  
+- Common in communication circuits for edge-based synchronization.  
+- Helps in debugging and testing of sequential circuits.  
+
+DESIGN REQUIREMENTS  
+1. Accept a digital input signal that may switch between 0 and 1.  
+2. Detect rising edge (0→1) and/or falling edge (1→0).  
+3. Generate a short output pulse only at the edge transitions.  
+4. Must be realizable using CMOS logic gates and flip-flops.  
+5. Should work reliably under different input frequencies.  
+
+DESIGN CONSTRAINTS  
+- Limited by propagation delay and available logic cells.  
+- Pulse width of highlighted edge must be carefully controlled.  
+- Circuit must avoid multiple triggering due to glitches.  
+- Low power and compact area design constraints must be considered.  
+
+DESIGN METHODOLOGY & IMPLEMENTATION DETAILS  
+1. Core Logic  
+   - Input signal is delayed using a Flip-Flop or buffer stage.  
+   - The delayed version is XORed with the current input to detect a transition.  
+   - The XOR output produces a pulse whenever an edge occurs.  
+
+2. Edge Selection  
+   - Rising edge or falling edge detection can be configured by AND/NOT combinations.  
+
+3. Implementation Steps  
+   - Schematic designed using CMOS gates (XOR, AND, NOT, Flip-Flops).  
+   - Functional simulation with different input waveforms.  
+   - Layout design and verification using CMOS design rules.  
+
+FUNCTIONAL SIMULATION METHODOLOGY & TEST CASES  
+- Input stimulus: Square wave or random digital signals with known edges.  
+- Test Cases:  
+  - TC1: Rising edge detection → short pulse generated at each 0→1 transition.  
+  - TC2: Falling edge detection → short pulse generated at each 1→0 transition.  
+  - TC3: Continuous signal with no transitions → no output pulse.  
+- Simulation Tool: SPICE/Cadence for transient waveform analysis.  
+
+RESULTS & ANALYSIS  
+- Circuit successfully highlighted edges of the input signal.  
+- Pulse width was consistent and controllable using delay elements.  
+- Rising and falling edge detection worked correctly in simulation.  
+- Layout verification passed DRC and LVS checks.  
+
+CHALLENGES & CONCLUSIONS  
+Challenges:  
+- Ensuring stable detection without glitches in high-frequency signals.  
+- Controlling the pulse width accurately.  
+- Minimizing area and delay overhead in implementation.  
+
+Conclusions:  
+The Edge Highlighter circuit was successfully designed and implemented. Simulation confirmed its ability to detect transitions and generate pulses only at signal edges. This experiment demonstrated the importance of edge detection in timing, synchronization, and event-driven digital systems.  
