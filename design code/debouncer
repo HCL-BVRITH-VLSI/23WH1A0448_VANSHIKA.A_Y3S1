@@ -1,0 +1,33 @@
+module debouncerlite #(
+parameter int N = 5
+)(
+input logic clk,
+input logic rst_n,
+input logic noisy_in,
+output logic debounced
+);
+logic sync1, sync2;
+logic [7:0] counter;
+always_ff @(posedge clk or negedge rst_n) begin
+if (!rst_n) begin
+sync1 &lt;= 1&#39;b0;
+sync2 &lt;= 1&#39;b0;
+debounced &lt;= 1&#39;b0;
+counter &lt;= 8&#39;d0;
+end else begin
+sync1 &lt;= noisy_in;
+
+sync2 &lt;= sync1;
+if (sync2 == debounced) begin
+counter &lt;= 8&#39;d0;
+end else begin
+if (counter == (N-1)) begin
+debounced &lt;= sync2;
+counter &lt;= 8&#39;d0;
+end else begin
+counter &lt;= counter + 1&#39;b1;
+end
+end
+end
+end
+endmodule
