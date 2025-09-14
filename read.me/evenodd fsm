@@ -1,0 +1,64 @@
+DESIGN REPORT
+
+PROBLEM STATEMENT  
+To design and implement an Even-Odd FSM (Finite State Machine) in VLSI that determines whether the number of 1’s in a given input sequence is even or odd. The FSM produces an output indicating the parity after each input bit.  
+
+USE CASE  
+- Used in error detection schemes (parity generation and checking).  
+- Helpful in digital counters and sequence detectors.  
+- Applied in communication systems for parity verification.  
+- Useful in designing simple digital controllers.  
+
+DESIGN REQUIREMENTS  
+1. Input: A binary sequence applied bit by bit.  
+2. Output: Logic ‘1’ if the number of 1’s seen so far is odd, logic ‘0’ if even (or vice versa).  
+3. FSM should have at least two states: EVEN and ODD.  
+4. Must be implementable using Flip-Flops and combinational logic.  
+5. Should work synchronously with a clock signal.  
+
+DESIGN CONSTRAINTS  
+- Limited by clock speed and propagation delay.  
+- FSM must remain stable under varying input sequences.  
+- Power and area usage should be minimized.  
+- Reset signal required to initialize FSM in the EVEN state.  
+
+DESIGN METHODOLOGY & IMPLEMENTATION DETAILS  
+1. State Diagram  
+   - Two states: EVEN (initial) and ODD.  
+   - Transition to next state depends on the input bit.  
+   - EVEN + input 1 → move to ODD.  
+   - ODD + input 1 → move to EVEN.  
+   - Input 0 → remain in current state.  
+
+2. State Encoding  
+   - EVEN = 0, ODD = 1 (binary encoding).  
+
+3. Implementation Steps  
+   - State machine described using D Flip-Flop for state memory.  
+   - Next state logic implemented using XOR gate with input and present state.  
+   - Schematic design in VLSI CAD tool.  
+   - Simulation with multiple input sequences.  
+   - Layout design and verification with CMOS rules.  
+
+FUNCTIONAL SIMULATION METHODOLOGY & TEST CASES  
+- Input stimulus: Different binary sequences of varying lengths.  
+- Test Cases:  
+  - TC1: Input 1011 → FSM detects 3 ones → ODD output.  
+  - TC2: Input 1100 → FSM detects 2 ones → EVEN output.  
+  - TC3: Input 0000 → No ones → EVEN output.  
+- Simulation Tool: SPICE/Cadence for timing and state verification.  
+
+RESULTS & ANALYSIS  
+- FSM successfully distinguished even and odd counts of 1’s.  
+- State transitions matched the designed state diagram.  
+- Propagation delay per transition was minimal.  
+- Layout verification passed DRC and LVS checks.  
+
+CHALLENGES & CONCLUSIONS  
+Challenges:  
+- Ensuring correct reset initialization to EVEN state.  
+- Avoiding glitches when input changes close to the clock edge.  
+- Maintaining correct state encoding in layout implementation.  
+
+Conclusions:  
+The Even-Odd FSM was successfully designed and implemented. Simulation confirmed correct parity detection of binary sequences. This experiment demonstrated the usefulness of FSMs in sequential logic design and highlighted their role in control, error detection, and communication systems.  
