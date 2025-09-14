@@ -1,1 +1,52 @@
+DESIGN REPORT:
+
+PROBLEM STATEMENT:
+To design and implement a Pulse Tracer circuit in VLSI that generates, propagates, and visually verifies the timing of a digital pulse through logic gates and interconnects. The aim is to analyze the delay, shape, and response of the pulse in a digital system.
+
+USE CASE:
+Verification of pulse propagation in digital systems.
+Studying timing delays and glitches in combinational/sequential circuits.
+Useful in clock distribution networks and test pattern verification in VLSI chips.
+
+DESIGN REQUIREMENTS:
+Ability to generate a clean pulse from a digital input.
+Propagation through different gate stages (inverter/buffer chains).
+Visual trace/observation of pulse waveform using simulation tools.
+Compatibility with standard CMOS technology libraries.
+
+DESIGN CONSTRAINTS:
+Technology node: Limited by standard cell library (e.g., 180nm/90nm CMOS).
+Power consumption must remain low.
+Pulse width must be sufficient to propagate through chosen number of stages without distortion.
+Delay and skew should be measurable within simulation limits.
+
+DESIGN METHODOLOGY & IMPLEMENTATION DETAILS:
+Pulse Generator: Implemented using a NAND gate + inverter combination or using a monostable configuration.
+Tracer Network: Chain of inverters/buffers to propagate the pulse, allowing observation of delay at each stage.
+Schematic Design: Created in VLSI CAD tool (Cadence/DSCH/Microwind).
+Layout Design: Standard CMOS layout rules applied (λ-based design rules).
+Netlist Generation: Extracted from schematic for functional simulation.
+
+FUNCTIONAL SIMULATION METHODOLOGY & TEST CASES:
+Input stimulus: Short digital pulse applied at input.
+Test Cases:
+TC1: Single short pulse at input → trace through inverter chain.
+TC2: Varying pulse width → check minimum width required for propagation.
+TC3: High-frequency pulse stream → analyze distortion and delay accumulation.
+Simulation Tool: SPICE/Cadence simulator for transient analysis.
+
+RESULTS & ANALYSIS:
+Pulse successfully generated and propagated through inverter chain.
+Measured propagation delay per stage increased linearly with gate count.
+Narrow pulses below a threshold failed to propagate (pulse swallowing).
+Power analysis showed low dynamic consumption per stage.
+Layout verification passed DRC and LVS checks.
+
+CHALLENGES & CONCLUSIONS:
+Challenges:
+Maintaining pulse width across multiple stages (avoiding shrinking pulses).
+Ensuring layout met DRC rules without increasing parasitic capacitance.
+Conclusions:
+the Pulse Tracer effectively demonstrated pulse generation and propagation in CMOS VLSI.
+The experiment highlighted the importance of pulse width, delay analysis, and layout constraints in real VLSI design.
 
