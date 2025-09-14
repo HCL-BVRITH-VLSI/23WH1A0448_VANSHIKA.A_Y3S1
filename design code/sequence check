@@ -1,0 +1,55 @@
+`timescale 1ns/1ps
+module seqcheck #(
+parameter int W = 5,
+parameter int K = 3
+)(
+input logic clk,
+input logic rst_n, // async active-low
+input logic in_sig,
+output logic hit
+);
+// Synchronizer + rise detect
+logic s1, s2, prev, rise;
+always_ff @(posedge clk or negedge rst_n) begin
+if (!rst_n) begin
+s1 &lt;= 1&#39;b0;
+s2 &lt;= 1&#39;b0;
+prev &lt;= 1&#39;b0;
+end else begin
+s1 &lt;= in_sig;
+s2 &lt;= s1;
+prev &lt;= s2;
+end
+end
+assign rise = s2 &amp; ~prev;
+// Ring buffer + running sum
+localparam int IW = (W &lt;= 2) ? 1 : $clog2(W);
+localparam int SW = (W &lt;= 1) ? 1 : $clog2(W+1);
+
+logic [SW-1:0] sum;
+logic [IW-1:0] idx;
+logic [W-1:0] rb;
+logic cond_d;
+// helper signals declared outside always
+logic [SW-1:0] next_sum;
+logic cond_next;
+always_ff @(posedge clk or negedge rst_n) begin
+if (!rst_n) begin
+sum &lt;= &#39;0;
+idx &lt;= &#39;0;
+rb &lt;= &#39;0;
+cond_d &lt;= 1&#39;b0;
+hit &lt;= 1&#39;b0;
+next_sum &lt;= &#39;0;
+cond_next&lt;= 1&#39;b0;
+end else begin
+next_sum = sum - rb[idx] + rise;
+sum &lt;= next_sum;
+rb[idx] &lt;= rise;
+idx &lt;= (idx == W-1) ? &#39;0 : (idx + 1&#39;b1);
+cond_next = (next_sum &gt;= K);
+hit &lt;= cond_next &amp; ~cond_d;
+cond_d &lt;= cond_next;
+end
+end
+endmodule
