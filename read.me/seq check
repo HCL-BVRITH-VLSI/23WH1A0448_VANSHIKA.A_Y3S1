@@ -1,0 +1,60 @@
+DESIGN REPORT  
+
+PROBLEM STATEMENT  
+To design and implement a Sequence Checker circuit in VLSI that detects a specific sequence of bits (e.g., "1011") in a serial input stream and generates an output signal when the sequence is found.  
+
+USE CASE  
+- Used in digital communication systems for frame synchronization.  
+- Detecting patterns in serial data streams (e.g., headers or control words).  
+- Error detection and protocol validation in networking.  
+- Applied in FSM-based controllers to monitor input sequences.  
+
+DESIGN REQUIREMENTS  
+1. Input: Serial bit stream (1-bit input per clock cycle).  
+2. Output: Logic high (1) when target sequence is detected, otherwise 0.  
+3. Target sequence: Example chosen = "1011" (can be modified).  
+4. System clock to synchronize input sampling.  
+5. Reset input to initialize the FSM.  
+
+DESIGN CONSTRAINTS  
+- Finite number of states for detecting sequence (FSM design).  
+- Must avoid false detections during overlapping sequences.  
+- Circuit must be optimized for low power and area.  
+- Design must pass DRC and LVS checks after layout.  
+
+DESIGN METHODOLOGY & IMPLEMENTATION DETAILS  
+1. FSM Design  
+   - States represent partial progress in detecting the sequence "1011".  
+   - Transition to next state depends on current input bit.  
+   - On reaching final state, output = 1.  
+
+2. Implementation Steps  
+   - Designed Mealy FSM with 5 states (S0 to S4).  
+   - Input "1" or "0" drives transitions based on sequence progress.  
+   - Verified state transitions using truth table and state diagram.  
+   - Implemented FSM using D flip-flops and combinational logic.  
+   - Layout designed and verified for connectivity and area.  
+
+FUNCTIONAL SIMULATION METHODOLOGY & TEST CASES  
+- Input stimulus: Serial data with multiple occurrences of "1011".  
+- Test Cases:  
+  - TC1: Input = 1011 → Output = 1 after last bit.  
+  - TC2: Input = 1011011 → Output = 1 at positions 4 and 7 (overlapping detection).  
+  - TC3: Input = 0001011 → Output = 1 at last four bits.  
+  - TC4: Input = 1111111 → Output remains 0.  
+- Simulation Tool: SPICE/Cadence for waveform validation.  
+
+RESULTS & ANALYSIS  
+- FSM correctly detected "1011" sequence with overlapping occurrences.  
+- Simulation waveforms confirmed expected outputs.  
+- Area usage was minimal since only 4 flip-flops were required.  
+- Timing analysis showed negligible propagation delay.  
+
+CHALLENGES & CONCLUSIONS  
+Challenges:  
+- Designing FSM carefully to handle overlapping sequences.  
+- Avoiding extra states while keeping transitions simple.  
+- Mapping state diagram into optimized logic for layout.  
+
+Conclusions:  
+The Sequence Checker circuit was successfully designed and implemented. The FSM detected the required sequence with high accuracy and efficiency. This experiment reinforced FSM-based design principles in VLSI and highlighted the importance of careful state transition planning.  
