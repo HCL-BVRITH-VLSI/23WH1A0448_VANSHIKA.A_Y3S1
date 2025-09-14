@@ -1,0 +1,53 @@
+DESIGN REPORT
+
+PROBLEM STATEMENT  
+To design and implement a Gray Coder circuit in VLSI that converts a binary input sequence into its corresponding Gray code output. Gray code ensures that only one bit changes between successive numbers, reducing errors in digital systems.  
+
+USE CASE  
+- Used in error minimization for counters and digital communication.  
+- Helpful in minimizing glitches during binary-to-analog conversion (DACs).  
+- Commonly used in position encoders and rotating machinery for error-free detection.  
+- Applied in asynchronous communication systems.  
+
+DESIGN REQUIREMENTS  
+1. Input: An n-bit binary sequence.  
+2. Output: Corresponding n-bit Gray code sequence.  
+3. Conversion logic must ensure only one bit changes between consecutive values.  
+4. Must be realizable using CMOS logic gates.  
+5. Should work for variable bit-width inputs (e.g., 3-bit, 4-bit).  
+
+DESIGN CONSTRAINTS  
+- Limited by available XOR and logic gate cells.  
+- Propagation delay should be minimized to support high-speed operation.  
+- Power and area should remain within acceptable limits.  
+- Proper testing required to ensure no more than one bit changes between consecutive outputs.  
+
+DESIGN METHODOLOGY & IMPLEMENTATION DETAILS  
+1. Conversion Logic  
+   - Most Significant Bit (MSB) of Gray code = MSB of binary input.  
+   - Each subsequent Gray bit = XOR of current binary bit and the previous binary bit.  
+
+   Example for 4-bit binary input (B3 B2 B1 B0):  
+   - G3 = B3  
+   - G2 = B3 XOR B2  
+   - G1 = B2 XOR B1  
+   - G0 = B1 XOR B0  
+
+2. Implementation Steps  
+   - XOR gates used for conversion logic.  
+   - Designed schematic using standard CMOS gates in CAD tools.  
+   - Functional simulation for different binary inputs.  
+   - Layout designed and verified using CMOS design rules.  
+
+FUNCTIONAL SIMULATION METHODOLOGY & TEST CASES  
+- Input stimulus: Binary numbers applied sequentially (0000 → 1111).  
+- Test Cases:  
+  - TC1: Binary 0000 → Gray 0000.  
+  - TC2: Binary 0001 → Gray 0001.  
+  - TC3: Binary 0010 → Gray 0011.  
+  - TC4: Binary 0011 → Gray 0010.  
+  - TC5: Full sequence verified for single-bit changes between consecutive outputs.  
+- Simulation Tool: SPICE/Cadence for waveform verification.  
+
+RESULTS & ANALYSIS  
+- Gray code outputs
