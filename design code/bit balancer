@@ -1,0 +1,27 @@
+`timescale 1ns/1ps
+module bitbalancer(
+input wire clk, // clock
+input wire reset, // reset signal
+input wire [7:0] in, // 8-bit input
+output reg [3:0] count // number of 1s in input
+);
+// function to count the ones in the 8-bit input
+function [3:0] count_ones;
+input [7:0] data_in;
+integer i;
+begin
+count_ones = 4&#39;d0;
+for (i = 0; i &lt; 8; i = i + 1) begin
+count_ones = count_ones + data_in[i];
+end
+end
+endfunction
+// sequential logic
+always @(posedge clk) begin
+if (reset) begin
+count &lt;= 4&#39;d0;
+end else begin
+count &lt;= count_ones(in);
+end
+end
+endmodule
